@@ -1,5 +1,5 @@
 <?php
-
+//php ajax function to establish a session with the FA (using the details given).
 //buffer the output until it's good and ready!
 ob_start();
 
