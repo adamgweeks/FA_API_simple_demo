@@ -1,3 +1,4 @@
+<!-- main page, with the form in it -->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 
 <html lang="en">
@@ -9,13 +10,14 @@
         <title>Simple FA Restful API demo</title>
         
         <link rel="stylesheet" href="css/base.css" type="text/css"/>
-
+<!-- Include the necessary Javascript libraries to make the page work! -->
         <script src="js/jquery-1.2.6.js" type="text/javascript"></script>
         <script src="js/ui.core.js" type="text/javascript"></script>
         <script src="js/jquery.cookie.js"></script>
         <script type="text/javascript">
+//when the page is completely loaded, run this:
  $(document).ready(function(){  
-    
+    //hide the empty results from the user
  	$("#request_type").hide();
  	$("#raw_info").hide();
  	$("#formatted_info").hide();
@@ -35,7 +37,7 @@ $("#api_token").blur(function(){
 if ($("#api_token").val()==''){$("#api_token").val('token');}
 });
    
-//Query button makes AJAX request   
+//Query button makes AJAX request (passesd to ajax_handler.php)   
 $("#submit").click(function(){
 $("#formatted_info tr").slice(1).remove();
 //alert("query for is " + $("#query_for").val());
@@ -43,7 +45,7 @@ $("#formatted_info tr").slice(1).remove();
     var return_obj=JSON.parse(result);
     var request = return_obj[0];
     var response = '';
-    
+//write each line out in the table    
 $(return_obj).each(function(index,value){ 
 	if(index>0){  response_add = JSON.stringify(value); response = response + response_add; 
 	GB_size = value['size']/(1024*1024*1024);
@@ -59,7 +61,7 @@ $(return_obj).each(function(index,value){
     //console.log(result);
   }});
 });
-
+//user has requested to start the session with the FA, pass it on to the ajax_array_connect.php page:
 $("#establish").click(function(){
 $.removeCookie('session'); 
   $.ajax({url: "./ajax_array_connect.php",data: { array_ip: $("#array_ip").val(), api_token: $("#api_token").val()},dataType: 'json',success: function(result){
